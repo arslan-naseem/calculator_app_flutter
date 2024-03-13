@@ -18,6 +18,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   bool cursorVisible = true;
   bool answerg = true;
 
+  String addition = '+', subtraction = '-', multiplication = 'x', divide = '/';
+
   @override
   void initState() {
     super.initState();
@@ -142,8 +144,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             title: '/',
                             color: Colors.deepOrange,
                             onPress: () {
-                              userinput += '/';
-                              setState(() {});
+                              checkFun(divide);
                             }),
                       ],
                     ),
@@ -177,11 +178,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             title: 'X',
                             color: Colors.deepOrange,
                             onPress: () {
-                              userinput = '';
-                              userinput += '${useranswer}x';
-                              setState(() {
-                                answerg = true;
-                              });
+                              checkFun(multiplication);
                             }),
                       ],
                     ),
@@ -215,10 +212,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             title: '-',
                             color: Colors.deepOrange,
                             onPress: () {
-                              userinput += '-';
-                              setState(() {
-                                answerg = true;
-                              });
+                              checkFun(subtraction);
                             }),
                       ],
                     ),
@@ -252,10 +246,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             title: '+',
                             color: Colors.deepOrange,
                             onPress: () {
-                              userinput += '+';
-                              setState(() {
-                                answerg = true;
-                              });
+                              checkFun(addition);
                             }),
                       ],
                     ),
@@ -299,5 +290,20 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 )),
           ],
         ));
+  }
+
+  void checkFun(String value) {
+    if (useranswer == '') {
+      userinput += value;
+      setState(() {
+        answerg = true;
+      });
+    } else if (useranswer != '') {
+      userinput = '';
+      userinput += '$useranswer$value';
+      setState(() {
+        answerg = true;
+      });
+    }
   }
 }
